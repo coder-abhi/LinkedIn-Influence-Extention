@@ -1,8 +1,24 @@
 {
     "name" : "LinkedIn Influence",
     "version" : "0.0.1",
-    "manifest_version" : 2,
-    "browser_action" : {
-        "default_popup" : "main.html"
-    }
+    "manifest_version" : 3,
+    "action": {
+        "default_popup": "main.html"
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.linkedin.com/search/results/*"
+            ],
+            "js": [
+                "script.js"
+            ]
+        }
+    ]
 }
