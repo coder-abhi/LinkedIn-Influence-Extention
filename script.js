@@ -1,4 +1,5 @@
 var connectList = [];
+// Collecting buttons of all Id's on page
 const sendConnectionRequest = async () => {
     const div = document.getElementsByClassName("entity-result__item");
     for (i in div) {
@@ -9,6 +10,8 @@ const sendConnectionRequest = async () => {
         }
     }
 }
+
+// Sending request to Buttons
 function processBegin() {
     let k = 0;
     setInterval(() => {
@@ -16,6 +19,8 @@ function processBegin() {
             connectList[i].click();
             setTimeout(() => {
                 sendNowBtn = document.getElementsByClassName('ml1')[0];
+
+                // Pressing send button when confirmation popup window showup
                 if (sendNowBtn.innerText == "Send") {
                     sendNowBtn.click();
                     k = k + 1;
@@ -25,11 +30,14 @@ function processBegin() {
         }
     }, 3500);
 }
+
+// Starting to collect button once page is loaded
 window.addEventListener('load', () => {
     sendConnectionRequest();
     chrome.runtime.sendMessage({ process: { status: "ready" } });
 });
-console.log(connectList)
+
+// Listener of initinl starting messege
 chrome.runtime.onMessage.addListener(({ process }) => {
     if (process.status == "start") {
         processBegin();
