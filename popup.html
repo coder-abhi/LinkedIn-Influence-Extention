@@ -8,15 +8,18 @@
     <title>LinkedIn Influencer Tool</title>
     <style>
         #newBtn {
-            width: 150px;
+            width: 100%;
         }
 
+        .container{
+            height: 100px;
+            width: 220px;
+        }
         .common {
             height: 50px;
             align-items: center;
             font-size: large;
             font-weight: 500;
-            width: 150px;
             display: flex;
             justify-content: space-evenly;
         }
@@ -24,8 +27,11 @@
 </head>
 
 <body>
-    <button id='newBtn'>Connecting</button>
-    <div class="common">Request Sent : <div id="reqCounter">0</div>
+    <div class="container">
+        <h2>LinkedIn AutoConnect</h2>
+        <button id='newBtn'>Connecting</button>
+        <div class="common">Request Sent : <div id="reqCounter">0</div>
+        </div>
     </div>
     <script src="popup.js">
     </script>
