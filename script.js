@@ -1,48 +1,38 @@
 var connectList = [];
-var listLoaded = 0;
 const sendConnectionRequest = async () => {
-    // console.log(document.getElementsByClassName('m11'))
     const div = document.getElementsByClassName("entity-result__item");
-    console.log(document.getElementById('popup'));
-    for(i in div){
-        // temp.push(div[i].getElementsByTagName('button'));
+    for (i in div) {
         let btn = div[i].getElementsByTagName('button')[0];
         console.log(btn.innerText)
-        if(btn.innerText === "Connect"){
+        if (btn.innerText === "Connect") {
             connectList.push(btn);
         }
     }
-    listLoaded = 1;
-    
-    
 }
-function sendNowFun()
-{
-    console.log(document.getElementsByClassName('ml1'))
-}
-function processBegin(){
+function processBegin() {
+    let k = 0;
     setInterval(() => {
-        for(i in connectList){
-            // document.addEventListener('load',sendNowFun)
+        for (i in connectList) {
             connectList[i].click();
-            // console.log("In Processsssn Begin")
             setTimeout(() => {
-                console.log(document.getElementsByClassName('ml1')[0].click());
-            }, 1000);
-            // window.addEventListener('load',sendNowFun);
-            // sendNowFun();
+                sendNowBtn = document.getElementsByClassName('ml1')[0];
+                if (sendNowBtn.innerText == "Send") {
+                    sendNowBtn.click();
+                    k = k + 1;
+                    chrome.runtime.sendMessage({ process: { count: k } })
+                }
+            }, 2000);
         }
-    }, 1000);
+    }, 3500);
 }
-window.addEventListener('load',sendConnectionRequest);
+window.addEventListener('load', () => {
+    sendConnectionRequest();
+    chrome.runtime.sendMessage({ process: { status: "ready" } });
+});
 console.log(connectList)
-chrome.runtime.onMessage.addListener(({process})=>{
-    console.log("In Meseeeege");
-
-    // if(process === "start" && listLoaded){
+chrome.runtime.onMessage.addListener(({ process }) => {
+    if (process.status == "start") {
         processBegin();
-    // }
+    }
 }
 )
-// sendConnectionRequest()
-// console.log(temp)

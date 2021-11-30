@@ -1,9 +1,9 @@
 {
-    "name" : "LinkedIn Influence",
-    "version" : "0.0.1",
-    "manifest_version" : 3,
+    "name": "LinkedIn Influence",
+    "version": "0.0.1",
+    "manifest_version": 3,
     "action": {
-        "default_popup": "main.html"
+        "default_popup": "popup.html"
     },
     "permissions": [
         "tabs"
